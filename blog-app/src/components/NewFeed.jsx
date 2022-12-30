@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import {
 	Col,
 	Container,
@@ -9,8 +10,7 @@ import {
 	Row,
 } from "reactstrap";
 import {
-   retrieveAllPosts,
-	retrieveAllPostsWithDefaultPaging,
+	retrieveAllPosts,
 	retrieveAllPostsWithPaging,
 } from "../services/post-service";
 import Post from "./Post";
@@ -25,38 +25,60 @@ function NewFeed() {
 		totalPages: "",
 	});
 
-   const [postSize, setPostSize] = useState(0);
+	const [postSize, setPostSize] = useState(0);
+	const [currentPageNumber, setCurrentPageNumber] = useState(0);
 
 	useEffect(() => {
-		retrieveAllPostsWithDefaultPaging()
+		retrieveAllPostsWithPaging(currentPageNumber)
 			.then((data) => {
 				console.log(data);
-				setPostList(data);
+				setPostList({
+					content: [...postList.content, ...data.content],
+					lastPage: data.lastPage,
+					pageNumber: data.pageNumber,
+					pageSize: data.pageSize,
+					totalElements: data.totalElements,
+					totalPages: data.totalPages,
+				});
 			})
 			.catch((error) => {
 				console.log(error);
 			});
+	}, [currentPageNumber]);
 
-         retrieveAllPosts()
-         .then((data)=> setPostSize(data.length));
-	}, []);
+	retrieveAllPosts().then((data) => setPostSize(data.length));
+
+	const changePageInfinite = () => {
+		console.log("page changed...");
+		setCurrentPageNumber(currentPageNumber + 1);
+	};
 
 	return (
 		<div className="container-fluid">
 			<Row>
 				<Col md={{ size: 8, offset: 2 }}>
-					 {/* eslint-disable-next-line jsx-a11y/no-distracting-elements */}
-					<marquee direction="right"><h2>Blog post ({postSize})</h2></marquee>
-					{postList.content.map((post) => {
-						return (
-							<Post
-								key={post.postId}
-								post={post}
-							/>
-						);
-					})}
+					{/* eslint-disable-next-line jsx-a11y/no-distracting-elements */}
+					<marquee direction="right">
+						<h2>Blog post ({postSize})</h2>
+					</marquee>
 
-					<Container className="mt-4">
+					<InfiniteScroll
+						dataLength={postList?.content?.length}
+						next={changePageInfinite}
+						hasMore={!postList.lastPage}
+						loader={<h4 className="text-center py-3">Loading...</h4>}
+						endMessage={
+							<p className="py-3" style={{ textAlign: "center" }}>
+								<b>Yay! You have seen all articles !</b>
+							</p>
+						}
+					>
+						{postList.content?.map((post, index) => {
+							return <Post key={index} post={post} />;
+						})}
+					</InfiniteScroll>
+
+					{/* <Container className="mt-4">
 						<Pagination>
 							<PaginationItem
 								onClick={() => {
@@ -120,7 +142,7 @@ function NewFeed() {
 								<PaginationLink last />
 							</PaginationItem>
 						</Pagination>
-					</Container>
+					</Container> */}
 				</Col>
 			</Row>
 		</div>
