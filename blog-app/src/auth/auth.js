@@ -29,7 +29,7 @@ export const currentLoggedInUser = () => {
 };
 
 export const getToken = () => {
-   console.log("token avail ");
+   console.log("token avail or not");
 
    if(isLoggedIn()){
       console.log("token available 1 ");

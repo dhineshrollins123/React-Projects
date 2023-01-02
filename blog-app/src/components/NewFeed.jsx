@@ -3,10 +3,6 @@ import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {
 	Col,
-	Container,
-	Pagination,
-	PaginationItem,
-	PaginationLink,
 	Row,
 } from "reactstrap";
 import {
@@ -44,6 +40,7 @@ function NewFeed() {
 			.catch((error) => {
 				console.log(error);
 			});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentPageNumber]);
 
 	retrieveAllPosts().then((data) => setPostSize(data.length));
@@ -56,7 +53,7 @@ function NewFeed() {
 	return (
 		<div className="container-fluid">
 			<Row>
-				<Col md={{ size: 8, offset: 2 }}>
+				<Col md={{ size: 12 }}>
 					{/* eslint-disable-next-line jsx-a11y/no-distracting-elements */}
 					<marquee direction="right">
 						<h2>Blog post ({postSize})</h2>

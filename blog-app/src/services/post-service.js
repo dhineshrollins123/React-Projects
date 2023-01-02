@@ -33,3 +33,13 @@ export const retrieveAllPosts = ()=>{
 export const loadParticularPostById = (id)=>{
   return myAxios.get("/api/posts?postId="+id).then(response => response.data);
 }
+
+export const uploadImageForPost = (image,postId) => {
+  let obj = new FormData();
+  obj.append("image",image);
+  return privateAxios.post(`/api/posts/image/upload/${postId}`,obj).then(response => response.data);
+}
+
+export const getParticularUserPosts = (userId) =>{
+  return myAxios.get(`/api/user/${userId}/posts`).then(response => response.data);
+}

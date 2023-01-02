@@ -49,7 +49,7 @@ function PostPage() {
 			return;
 		}
 
-		if(comment.trim()===""){
+		if (comment.trim() === "") {
 			toast.error("Type something !");
 			return;
 		}
@@ -97,6 +97,21 @@ function PostPage() {
 											}}
 											className="divider mb-3"
 										></div>
+
+										{post.imageName !== null &&
+											post.imageName?.trim() !== "" && (
+												<div className="text-center">
+													<img
+														style={{
+															width: "30%",
+															height: "30%",
+														}}
+														src={`http://localhost:8080/api/posts/image/${post.imageName}`}
+														alt="dogimage"
+													/>
+												</div>
+											)}
+
 										<h1>{post.title}</h1>
 										<CardText
 											className="mt-3"
@@ -122,7 +137,7 @@ function PostPage() {
 									);
 								})}
 
-								<Card>
+								<Card className="mb-5">
 									<CardBody>
 										<Input
 											name="comment"

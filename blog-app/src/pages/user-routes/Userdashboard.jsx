@@ -1,13 +1,16 @@
-import React from 'react'
-import AddPost from '../../components/AddPost'
-import Base from '../../components/Base'
+import React from "react";
+import Base from "../../components/Base";
+import AddPost from "../../components/AddPost";
+
 
 function Userdashboard() {
-  return (
-    <Base>
-      <AddPost />
-    </Base>
-  )
+
+	return (
+		<Base>
+			<AddPost />
+			
+		</Base>
+	);
 }
 
-export default Userdashboard
+export default Userdashboard;

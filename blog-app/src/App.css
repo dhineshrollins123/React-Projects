@@ -42,6 +42,15 @@
   background-color: #dbdce0;
 }
 
+body{
+  background-color: #dbdce0 !important;
+}
+
+
+footer{
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 /* .page-link{
   background-color: #313237!important;
   border-color: #313237!important;

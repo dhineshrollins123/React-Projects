@@ -47,12 +47,17 @@ function CustomNavBar(args) {
 					<Nav className="me-auto" navbar>
 						<NavItem>
 							<NavLink tag={ReactNavLink} to="/">
-								News Feed
+								New Feed
 							</NavLink>
 						</NavItem>
 						<NavItem>
 							<NavLink tag={ReactNavLink} to="/user/dashboard">
 								Upload Blog
+							</NavLink>
+						</NavItem>
+						<NavItem>
+							<NavLink tag={ReactNavLink} to="/myblogs">
+								MyPosts
 							</NavLink>
 						</NavItem>
 						<NavItem>
