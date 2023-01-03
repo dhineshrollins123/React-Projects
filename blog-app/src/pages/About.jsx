@@ -3,11 +3,11 @@ import Base from "../components/Base";
 import userContext from "../context/userContext";
 
 const About = () => {
-	const user = useContext(userContext);
+	const userContextData = useContext(userContext);
 	return (
 		<Base>
 			<h1>This is from about . </h1>
-			<h1>Welcome {user.name}</h1>
+			<h1>Welcome {userContextData.user.data.name}</h1>
 		</Base>
 	);
 };

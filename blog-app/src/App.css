@@ -49,6 +49,8 @@ body{
 
 footer{
   background-color: rgba(0, 0, 0, 0.2);
+  position: relative;
+  top: 185px;
 }
 
 /* .page-link{

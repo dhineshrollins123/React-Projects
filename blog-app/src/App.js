@@ -29,11 +29,12 @@ function App() {
 					<Route path="/services" element={<Services />} />
 					<Route path="/posts/:postId" element={<PostPage />} />
 					<Route path="/categories/:categoryId" element={<Categories />} />
-					<Route path="/myblogs" element={<MyBlog />} />
+					
 
 					<Route path="/user" element={<PrivateRoute />}>
 						<Route path="dashboard" element={<Userdashboard />} />
 						<Route path="profile" element={<UserProfile />} />
+						<Route path="myblogs" element={<MyBlog />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

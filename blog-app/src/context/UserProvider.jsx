@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { currentLoggedInUser } from '../auth/auth';
+import { currentLoggedInUser, isLoggedIn } from '../auth/auth';
 import userContext from './userContext'
 
 function UserProvider({children}) {
 
-  const [user,setUser] = useState({});
+  const [user,setUser] = useState({
+    data: {},
+    login: false
+  });
 
   useEffect(() => {
-    const user = currentLoggedInUser();
-    console.log("user 1 : "+JSON.stringify(user));
-    if(user){
-      console.log("user 2 : "+JSON.stringify(user));
-      setUser(user);
-    }
+    setUser({
+      data: currentLoggedInUser(),
+      login: isLoggedIn()
+    });
   },[]);
 
   return (
-    <userContext.Provider value={user}>
+    <userContext.Provider value={{user,setUser}}>
       {children}
     </userContext.Provider>
   )

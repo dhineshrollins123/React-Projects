@@ -43,3 +43,7 @@ export const uploadImageForPost = (image,postId) => {
 export const getParticularUserPosts = (userId) =>{
   return myAxios.get(`/api/user/${userId}/posts`).then(response => response.data);
 }
+
+export const deleteParticularPost = (postId) =>{
+  return privateAxios.delete(`/api/posts?postId=${postId}`).then(response => response.data);
+}

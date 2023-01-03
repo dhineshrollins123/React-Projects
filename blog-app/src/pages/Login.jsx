@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -17,6 +17,7 @@ import {
 } from "reactstrap";
 import { doLogin } from "../auth/auth";
 import Base from "../components/Base";
+import userContext from "../context/userContext";
 import { login } from "../services/user-service";
 
 const Login = () => {
@@ -29,6 +30,8 @@ const Login = () => {
 		error: {},
 		isError: false,
 	});
+
+	const userContextData = useContext(userContext);
 
 	const navigate = useNavigate();
 
@@ -46,12 +49,15 @@ const Login = () => {
 		event.preventDefault();
 		login(data)
 			.then((response) => {
-				console.log(response);
 				doLogin(response, () =>
 					console.log("Login detail is saved into local storage")
 				);
 				toast.success("Login Successfully !");
-				navigate("/user/dashboard")
+				userContextData.setUser({
+					data: response.user,
+					login: true,
+				});
+				navigate("/user/myblogs");
 			})
 			.catch((error1) => {
 				if (error1.response?.data?.message != null) {

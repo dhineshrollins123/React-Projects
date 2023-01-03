@@ -20,7 +20,7 @@ function CategorySideBar() {
 	return (
 		<div>
 			<ListGroup>
-				<ListGroupItem tag={Link} to="/" action="true" className="border-0">
+				<ListGroupItem tag={Link} to="/" action={true} className="border-0">
 					All Blogs
 				</ListGroupItem>
 
@@ -31,7 +31,7 @@ function CategorySideBar() {
 								tag={Link}
 								to={"/categories/" + category.categoryId}
 								key={category.categoryId}
-								action="true"
+								action={true}
 								className="border-0 shadow-0 mt-1"
 							>
 								{category.categoryTitle}
