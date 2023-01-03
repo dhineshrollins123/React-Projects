@@ -40,6 +40,19 @@ function Post(props) {
 								Delete
 							</Button>
 						)}
+
+						{userContextData.user.login &&
+						props.enabled &&
+						user.userId === props.post.user.userId && (
+							<Button
+								// onClick={() => props.deletePost(props.post.postId)}
+								tag={Link}
+								to={`/user/update-blog/${props.post.postId}`}
+								color="warning ms-2"
+							>
+								Update
+							</Button>
+						)}
 				</div>
 			</CardBody>
 		</Card>

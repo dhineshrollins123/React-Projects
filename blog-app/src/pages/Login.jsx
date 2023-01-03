@@ -15,7 +15,7 @@ import {
 	Label,
 	Row,
 } from "reactstrap";
-import { doLogin } from "../auth/auth";
+import { doLogin, isLoggedIn } from "../auth/auth";
 import Base from "../components/Base";
 import userContext from "../context/userContext";
 import { login } from "../services/user-service";
@@ -82,87 +82,97 @@ const Login = () => {
 	}
 
 	return (
-		<div className="bgImage">
-			<Base>
-				<Container>
-					<Row className="mt-4">
-						<Col sm={{ size: 4, offset: 4 }}>
-							<Card color="dark" inverse>
-								<CardHeader>
-									<h3 className="text-center">Login Here !</h3>
-								</CardHeader>
-								<CardBody>
-									<Form onSubmit={submitForm}>
-										{/* email field */}
+		!userContextData.user.login && (
+			<div className="bgImage">
+				<Base>
+					<Container>
+						<Row className="mt-4">
+							<Col sm={{ size: 4, offset: 4 }}>
+								<Card color="dark" inverse>
+									<CardHeader>
+										<h3 className="text-center">Login Here !</h3>
+									</CardHeader>
+									<CardBody>
+										<Form onSubmit={submitForm}>
+											{/* email field */}
 
-										<FormGroup>
-											<Label for="email">Enter Email ID :</Label>
+											<FormGroup>
+												<Label for="email">Enter Email ID :</Label>
 
-											<Input
-												type="email"
-												placeholder="Enter email here"
-												id="email"
-												name="userName"
-												onChange={handleChange}
-												value={data.userName}
-												invalid={
-													errors.error?.response?.data?.userName ? true : false
-												}
-												valid={
-													errors.error?.response?.data?.userName ? false : true
-												}
-											/>
+												<Input
+													type="email"
+													placeholder="Enter email here"
+													id="email"
+													name="userName"
+													onChange={handleChange}
+													value={data.userName}
+													invalid={
+														errors.error?.response?.data?.userName
+															? true
+															: false
+													}
+													valid={
+														errors.error?.response?.data?.userName
+															? false
+															: true
+													}
+												/>
 
-											<FormFeedback>
-												{errors.error?.response?.data?.userName}
-											</FormFeedback>
-										</FormGroup>
+												<FormFeedback>
+													{errors.error?.response?.data?.userName}
+												</FormFeedback>
+											</FormGroup>
 
-										{/* password field */}
+											{/* password field */}
 
-										<FormGroup>
-											<Label for="password">Enter Password :</Label>
+											<FormGroup>
+												<Label for="password">Enter Password :</Label>
 
-											<Input
-												type="password"
-												placeholder="Enter password here"
-												id="password"
-												name="password"
-												onChange={handleChange}
-												value={data.password}
-												invalid={
-													errors.error?.response?.data?.password ? true : false
-												}
-												valid={
-													errors.error?.response?.data?.password ? false : true
-												}
-											/>
-											<FormFeedback>
-												{errors.error?.response?.data?.password}
-											</FormFeedback>
-										</FormGroup>
+												<Input
+													type="password"
+													placeholder="Enter password here"
+													id="password"
+													name="password"
+													onChange={handleChange}
+													value={data.password}
+													invalid={
+														errors.error?.response?.data?.password
+															? true
+															: false
+													}
+													valid={
+														errors.error?.response?.data?.password
+															? false
+															: true
+													}
+												/>
+												<FormFeedback>
+													{errors.error?.response?.data?.password}
+												</FormFeedback>
+											</FormGroup>
 
-										<Container className="text-center">
-											<Button className="mt-4 mb-4" color="warning">
-												Login
-											</Button>
-											<Button
-												onClick={resetData}
-												className="ms-3"
-												type="reset"
-												color="secondary"
-											>
-												Reset
-											</Button>
-										</Container>
-									</Form>
-								</CardBody>
-							</Card>
-						</Col>
-					</Row>
-				</Container>
-			</Base>
-		</div>
+											<Container className="text-center">
+												<Button className="mt-4 mb-4" color="warning">
+													Login
+												</Button>
+												<Button
+													onClick={resetData}
+													className="ms-3"
+													type="reset"
+													color="secondary"
+												>
+													Reset
+												</Button>
+											</Container>
+										</Form>
+									</CardBody>
+								</Card>
+							</Col>
+						</Row>
+					</Container>
+				</Base>
+			</div>
+		)
 	);
 };
 

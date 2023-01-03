@@ -15,8 +15,10 @@ import PostPage from "./pages/PostPage";
 import UserProvider from "./context/UserProvider";
 import Categories from "./pages/Categories";
 import MyBlog from "./pages/MyBlog";
+import UpdatePost from "./components/UpdatePost";
 
 function App() {
+
 	return (
 		<UserProvider>
 			<BrowserRouter>
@@ -35,6 +37,7 @@ function App() {
 						<Route path="dashboard" element={<Userdashboard />} />
 						<Route path="profile" element={<UserProfile />} />
 						<Route path="myblogs" element={<MyBlog />} />
+						<Route path="update-blog/:postId" element={<UpdatePost />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>
