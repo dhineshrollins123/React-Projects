@@ -13,7 +13,7 @@ export const privateAxios = axios.create({
 	baseURL: BASE_URL
 });
 
-if (token) {
+if (token !== null) {
 	console.log("token available 2");
 	privateAxios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 }

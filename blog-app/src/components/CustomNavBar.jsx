@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink as ReactNavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink as ReactNavLink, useNavigate } from "react-router-dom";
 import {
 	Collapse,
 	Navbar,
@@ -74,11 +74,11 @@ function CustomNavBar(args) {
 								More
 							</DropdownToggle>
 							<DropdownMenu right>
-								<DropdownItem>Contact Us</DropdownItem>
-								<DropdownItem divider />
-								<DropdownItem>Youtube</DropdownItem>
-								<DropdownItem>Instagram</DropdownItem>
-								<DropdownItem>LinkedIn</DropdownItem>
+								{/* <DropdownItem>Contact Us</DropdownItem>
+								<DropdownItem divider /> */}
+								<DropdownItem onClick={() =>  window.location.href='https://www.youtube.com/@dkmiracles8745/videos'} >Youtube</DropdownItem>
+								<DropdownItem onClick={() =>  window.location.href='https://www.instagram.com/'}>Instagram</DropdownItem>
+								<DropdownItem onClick={() =>  window.location.href='https://in.linkedin.com/'}>LinkedIn</DropdownItem>
 							</DropdownMenu>
 						</UncontrolledDropdown>
 					</Nav>
@@ -88,7 +88,7 @@ function CustomNavBar(args) {
 							<>
 								<NavbarText className="px-3">{user?.email}</NavbarText>
 								<NavItem>
-									<NavLink tag={ReactNavLink} to="/user/profile">
+									<NavLink tag={ReactNavLink} to={`/user/profile/${user.userId}`}>
 										Profile
 									</NavLink>
 								</NavItem>

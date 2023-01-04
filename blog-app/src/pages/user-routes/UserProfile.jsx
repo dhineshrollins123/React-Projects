@@ -1,17 +1,32 @@
-import React from 'react'
-import { currentLoggedInUser } from '../../auth/auth'
-import Base from '../../components/Base';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Col, Row } from "reactstrap";
+import Base from "../../components/Base";
+import ViewUserProfile from "../../components/ViewUserProfile";
+import { getUser } from "../../services/user-service";
 
 function UserProfile() {
-   const user = currentLoggedInUser();
-   console.log(user);
-  return (
-    <Base>
-      <h1>NAME : {user.name}</h1>
-      <h1>USERNAME : {user.email}</h1>
-      <h1>ROLE : {user.roles[0].roleName}</h1>
-    </Base>
-  )
+	const { userId } = useParams();
+	const [user, setUser] = useState({});
+
+	useEffect(() => {
+		getUser(userId)
+			.then((data) => {
+				setUser({...data});
+			})
+			.catch((err) => console.log(err));
+	}, [userId]);
+	
+	return (
+		<Base>
+			<Row>
+				<Col md={{ size: 8, offset: 2 }}>
+        {console.log("prof user : "+JSON.stringify(user))} 
+					<ViewUserProfile user={user} />
+				</Col>
+			</Row>
+		</Base>
+	);
 }
 
-export default UserProfile
+export default UserProfile;
