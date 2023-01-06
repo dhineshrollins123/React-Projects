@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
 	Button,
 	Card,
@@ -68,7 +69,7 @@ const ViewUserProfile = ({user}) => {
 			</CardBody>
 			{currentUser && currentUser.userId === user.userId && (
 				<CardFooter className="bg-white border-0 pb-3">
-					<Button color="warning">Update Profile</Button>
+					<Button tag={Link} to={`/user/update-profile/${currentUser.userId}`} color="warning">Update Profile</Button>
 				</CardFooter>
 			)}
 		</Card>

@@ -16,6 +16,7 @@ import UserProvider from "./context/UserProvider";
 import Categories from "./pages/Categories";
 import MyBlog from "./pages/MyBlog";
 import UpdatePost from "./components/UpdatePost";
+import UpdateProfile from "./components/UpdateProfile";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
 					<Route path="/user" element={<PrivateRoute />}>
 						<Route path="dashboard" element={<Userdashboard />} />
 						<Route path="profile/:userId" element={<UserProfile />} />
+						<Route path="update-profile/:userId" element={<UpdateProfile />} />
 						<Route path="myblogs" element={<MyBlog />} />
 						<Route path="update-blog/:postId" element={<UpdatePost />} />
 					</Route>

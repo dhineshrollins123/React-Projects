@@ -55,7 +55,6 @@ function PostPage() {
 		}
 		submitComment(comment, postId)
 			.then((response) => {
-				console.log(response);
 				toast.success("Comment Added !");
 				setComment("");
 			})
@@ -107,7 +106,7 @@ function PostPage() {
 															height: "30%",
 														}}
 														src={`http://localhost:8080/api/posts/image/${post.imageName}`}
-														alt="dogimage"
+														alt="not-found"
 													/>
 												</div>
 											)}
@@ -131,8 +130,11 @@ function PostPage() {
 
 								{post.postComments?.map((comment, index) => {
 									return (
-										<Card className="my-3 border-0 rounded-0" key={index}>
-											<CardText>{comment.content}</CardText>
+										<Card style={{position: "relative"}} className="my-3 border-0 rounded-0" key={index}>
+											<div style={{display: "inline"}}>
+											<CardText style={{width: "25%",position: "relative", top: "8px"}} className="text-uppercase fw-bold badge bg-primary text-wrap">{comment?.userDto?.name}</CardText>
+											<CardText className="ms-2">{comment.content}</CardText>
+											</div>
 										</Card>
 									);
 								})}

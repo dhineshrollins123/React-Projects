@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, NavLink as ReactNavLink, useNavigate } from "react-router-dom";
+import { NavLink as ReactNavLink, useNavigate } from "react-router-dom";
 import {
 	Collapse,
 	Navbar,
@@ -45,7 +45,7 @@ function CustomNavBar(args) {
 	return (
 		<div>
 			<Navbar expand="md" fixed="" color="dark" dark {...args}>
-				<NavbarBrand>MyBlogs</NavbarBrand>
+				<NavbarBrand>dkBlogs</NavbarBrand>
 				<NavbarToggler onClick={toggle} />
 				<Collapse isOpen={isOpen} navbar>
 					<Nav className="me-auto" navbar>
@@ -86,7 +86,7 @@ function CustomNavBar(args) {
 					<Nav navbar>
 						{isLogin && (
 							<>
-								<NavbarText className="px-3">{user?.email}</NavbarText>
+								<NavbarText className="px-3">{userContextData.user?.data?.email}</NavbarText>
 								<NavItem>
 									<NavLink tag={ReactNavLink} to={`/user/profile/${user.userId}`}>
 										Profile

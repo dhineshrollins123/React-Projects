@@ -1,4 +1,4 @@
-import { myAxios } from "./handler";
+import { myAxios, privateAxios } from "./handler";
 
 export const signUp = (user) => {
 	return myAxios
@@ -16,4 +16,10 @@ export const getUser = (userId) => {
 	return myAxios
 		.get(`/api/users?userId=${userId}`)
 		.then((response) => response.data);
+};
+
+export const updateUserService = (userId,user) => {
+	return privateAxios
+		.put(`/api/users?userId=${userId}`,user)
+		.then((resp) => resp.data);
 };

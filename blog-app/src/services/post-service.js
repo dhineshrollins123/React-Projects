@@ -1,4 +1,6 @@
+import { currentLoggedInUser } from "../auth/auth";
 import { myAxios, privateAxios } from "./handler";
+
 
 export const createPost = (post,user) => {
 
@@ -12,9 +14,12 @@ export const createPost = (post,user) => {
 }
 
 export const submitComment = (comment,postId)=>{
+  let user = currentLoggedInUser();
   const commentBody = {
-    content: comment
+    content: comment,
+    userDto: user
   }
+
   return privateAxios.post(`/api/posts/${postId}/comments`,commentBody).then(response => response.data);
 }
 

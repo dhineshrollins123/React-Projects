@@ -14,7 +14,10 @@ import {
 } from "reactstrap";
 import Base from "../components/Base";
 import { useParams } from "react-router-dom";
-import { loadParticularPostById, updatePostService } from "../services/post-service";
+import {
+	loadParticularPostById,
+	updatePostService,
+} from "../services/post-service";
 import { toast } from "react-toastify";
 
 function UpdatePost() {
@@ -38,16 +41,12 @@ function UpdatePost() {
 	useEffect(() => {
 		loadParticularPostById(postId)
 			.then((data) => {
-				console.log("up data : " + JSON.stringify(data));
-
-				setPost({ ...data,categoryId: data.category.categoryId });
+				setPost({ ...data, categoryId: data.category.categoryId });
 			})
 			.catch((error) => console.log(error));
-
-		console.log("up post : " + JSON.stringify(post));
 	}, [postId]);
 
-   function handleChange(event) {
+	function handleChange(event) {
 		const { name, value } = event.target;
 		setPost((prevState) => {
 			return {
@@ -57,7 +56,7 @@ function UpdatePost() {
 		});
 	}
 
-   const handleContentChange = (data) => {
+	const handleContentChange = (data) => {
 		setPost((prevState) => {
 			return {
 				...prevState,
@@ -66,17 +65,21 @@ function UpdatePost() {
 		});
 	};
 
-   function updatePost(event){
-      event.preventDefault();
-      updatePostService(post.postId,{...post,category: {categoryId: post.categoryId}})
-      .then(data => {
-         console.log(data);
-         toast.success("BLOG UPDATED !");
-      }).catch(error => {
-         console.log(error);
-         toast.error("Error occurred while updating blog !");
-      });
-   }
+	function updatePost(event) {
+		event.preventDefault();
+		updatePostService(post.postId, {
+			...post,
+			category: { categoryId: post.categoryId },
+		})
+			.then((data) => {
+				console.log(data);
+				toast.success("BLOG UPDATED !");
+			})
+			.catch((error) => {
+				console.log(error);
+				toast.error("Error occurred while updating blog !");
+			});
+	}
 
 	const updateBlog = () => {
 		return (
